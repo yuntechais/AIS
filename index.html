@@ -79,7 +79,7 @@
         }
     </style>
 </head>
-<body class="bg-brand-bg text-gray-800 font-sans flex flex-col min-h-screen">
+<body class="bg-brand-bg text-gray-800 font-sans flex flex-col min-h-screen overflow-x-hidden">
 
     <header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,8 +90,8 @@
                     <img 
                         src="https://www.image2url.com/r2/default/images/1782913702721-295b9301-5a33-461a-b8e6-38dd8e05da81.png" 
                         alt="AIS Logo" 
-                        class="h-12 w-auto mr-3 object-contain"
-                        onerror="this.onerror=null; this.outerHTML='<div class=\'h-10 w-10 mr-3 rounded-full bg-brand-navy flex items-center justify-center text-white\'><i class=\'fa-solid fa-globe\'></i></div>';"
+                        class="h-12 w-12 mr-3 object-contain bg-white rounded-full p-1 border border-gray-200 shadow-sm"
+                        onerror="this.onerror=null; this.outerHTML='<div class=\'h-12 w-12 mr-3 rounded-full bg-brand-navy flex items-center justify-center text-white\'><i class=\'fa-solid fa-globe\'></i></div>';"
                     >
                     <span class="font-heading font-bold text-xl text-brand-navy tracking-tight hidden sm:block">AIS YunTech</span>
                 </div>
@@ -353,8 +353,8 @@
                     </div>
 
                     <!-- Google Maps Iframe -->
-                    <div class="bg-white/10 p-2 rounded-2xl backdrop-blur-sm border border-white/20">
-                        <div class="rounded-xl overflow-hidden aspect-video w-full h-full min-h-[300px]">
+                    <div class="bg-white/10 p-2 rounded-2xl backdrop-blur-sm border border-white/20 w-full overflow-hidden">
+                        <div class="rounded-xl overflow-hidden w-full h-64 md:h-[400px]">
                             <!-- Embedded map pointing to National Yunlin University of Science and Technology -->
                             <iframe 
                                 src="https://maps.google.com/maps?q=National%20Yunlin%20University%20of%20Science%20and%20Technology,%20Taiwan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
@@ -376,12 +376,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
             
             <div class="flex items-center mb-6 md:mb-0">
-                <!-- AIS Logo (Removed invert filter, added bg-white and rounded padding for better contrast on dark footer) -->
+                <!-- AIS Logo -->
                 <img 
                     src="https://www.image2url.com/r2/default/images/1782913702721-295b9301-5a33-461a-b8e6-38dd8e05da81.png" 
                     alt="AIS Logo" 
-                    class="h-12 w-auto mr-4 object-contain bg-white rounded-lg p-1.5"
-                    onerror="this.onerror=null; this.outerHTML='<div class=\'w-10 h-10 bg-brand-blue/30 rounded-full flex items-center justify-center mr-3\'><i class=\'fa-solid fa-globe text-white opacity-90\'></i></div>';"
+                    class="h-12 w-12 mr-4 object-contain bg-white rounded-full p-1 border-2 border-white/20"
+                    onerror="this.onerror=null; this.outerHTML='<div class=\'w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 border-2 border-white/20\'><i class=\'fa-solid fa-globe text-white opacity-90\'></i></div>';"
                 >
                 <div class="text-sm">
                     <p class="font-bold text-white tracking-wider mb-1">AIS YunTech</p>
