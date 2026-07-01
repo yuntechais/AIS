@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIS YunTech | Association of International Students</title>
+    <meta name="description" content="Bridging Cultures. Empowering Global Students. The official cultural facilitator and event organizer for international students at National Yunlin University of Science and Technology.">
+    
+    <!-- Google Fonts: Poppins (Headings) and Noto Sans (Body text, supports Chinese) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for standard UI and social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN for zero-build setup) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0B2C5E',
+                            blue: '#1E5AA8',
+                            green: '#2E7D32',
+                            lightgreen: '#66BB6A',
+                            bg: '#F7F9FA'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans"', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities and Animations */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .font-heading { font-family: 'Poppins', sans-serif; }
+        
+        /* Fade in scroll animation classes */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* VIP Card styling for Membership section */
+        .vip-card {
+            background: linear-gradient(135deg, #0B2C5E 0%, #1E5AA8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .vip-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Area -->
+                <div class="flex items-center flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- TODO: share.google links are not direct image files. If the logo doesn't render, re-host this image on Imgur, GitHub raw, or a Google Drive file set to "Anyone with the link" using the format https://drive.google.com/uc?export=view&id=FILE_ID, then paste that URL here instead. -->
+                    <img 
+                        src="https://www.image2url.com/r2/default/images/1782913702721-295b9301-5a33-461a-b8e6-38dd8e05da81.png" 
+                        alt="AIS Logo" 
+                        class="h-12 w-auto mr-3 object-contain"
+                        onerror="this.onerror=null; this.outerHTML='<div class=\'h-10 w-10 mr-3 rounded-full bg-brand-navy flex items-center justify-center text-white\'><i class=\'fa-solid fa-globe\'></i></div>';"
+                    >
+                    <span class="font-heading font-bold text-xl text-brand-navy tracking-tight hidden sm:block">AIS YunTech</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-brand-blue font-medium transition-colors">About Us</a>
+                    <a href="#events" class="text-gray-600 hover:text-brand-blue font-medium transition-colors">Events</a>
+                    <a href="#membership" class="text-gray-600 hover:text-brand-blue font-medium transition-colors">Membership</a>
+                    <a href="#contact" class="text-gray-600 hover:text-brand-blue font-medium transition-colors">Contact Us</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-navy hover:text-brand-blue focus:outline-none p-2" aria-label="Toggle menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">About Us</a>
+                <a href="#events" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Events</a>
+                <a href="#membership" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Membership</a>
+                <a href="#contact" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        <section id="home" class="relative bg-brand-navy overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute inset-0 opacity-10">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-40 relative z-10 flex flex-col items-center text-center">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-brand-blue/30 border border-brand-blue text-white text-sm font-semibold mb-6 tracking-wide">
+                    National Yunlin University of Science and Technology
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-white mb-6 leading-tight">
+                    Association of <span class="text-brand-lightgreen">International</span> Students
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-200 font-medium mb-4 font-heading">
+                    Bridging Cultures. Empowering Global Students.
+                </p>
+                <p class="max-w-3xl text-base md:text-lg text-gray-300 mb-10 leading-relaxed">
+                    The official cultural facilitator and event organizer under YunTech's Office of International Affairs. We build community, celebrate diversity, and support your journey in Taiwan.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#about" class="px-8 py-3.5 rounded-lg bg-brand-green hover:bg-brand-lightgreen text-white font-bold transition-all transform hover:-translate-y-1 shadow-lg text-center">
+                        About Us
+                    </a>
+                    <a href="#events" class="px-8 py-3.5 rounded-lg bg-white hover:bg-gray-100 text-brand-navy font-bold transition-all transform hover:-translate-y-1 shadow-lg text-center">
+                        See Our Events
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 lg:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- History & Purpose -->
+                <div class="text-center max-w-4xl mx-auto mb-16 fade-in-section">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-6">History & Purpose</h2>
+                    <div class="w-20 h-1 bg-brand-green mx-auto mb-6 rounded-full"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        The Association of International Students (AIS) was founded to unite international students at YunTech. Serving as the official cultural facilitator and event-organizing arm of the Office of International Affairs (OIA), we are deeply focused on cultural integration, student wellbeing, and fostering professional and network development.
+                    </p>
+                </div>
+
+                <!-- Vision & Mission Grid -->
+                <div class="grid lg:grid-cols-2 gap-10 items-stretch fade-in-section">
+                    
+                    <!-- Vision Card -->
+                    <div class="bg-brand-bg rounded-2xl p-8 border-t-4 border-brand-blue shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue mr-4">
+                                <i class="fa-solid fa-eye text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-heading font-bold text-brand-navy">Our Vision</h3>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed">
+                            To become YunTech's leading global facilitator organization — bridging cultural diversity, developing the professional capacity of international students, and supporting the internationalization goals of the Office of International Affairs through inclusive, agile, and financially sustainable event management.
+                        </p>
+                    </div>
+
+                    <!-- Mission Card -->
+                    <div class="bg-brand-bg rounded-2xl p-8 border-t-4 border-brand-green shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green mr-4">
+                                <i class="fa-solid fa-bullseye text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-heading font-bold text-brand-navy">Our Mission</h3>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            To excel in field execution, optimizing budget use and reducing bureaucratic redundancy through:
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-brand-lightgreen mt-1 mr-3"></i>
+                                <span class="text-gray-700"><strong class="text-brand-navy">Digital Expansion & Visibility:</strong> Transforming event publicity into measurable social media campaigns that strengthen YunTech's international profile and help attract prospective global students.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-brand-lightgreen mt-1 mr-3"></i>
+                                <span class="text-gray-700"><strong class="text-brand-navy">Inclusivity & Leadership Succession:</strong> Designing a volunteer framework that allows students from diverse countries and academic years to participate dynamically and grow into future leaders.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Core Values Alignment -->
+                <div class="mt-12 text-center bg-gray-50 rounded-xl p-6 border border-gray-100 fade-in-section">
+                    <p class="text-gray-600">
+                        AIS proudly aligns with YunTech's official core values: <strong class="text-brand-navy">Sincerity, Honor, Perseverance, and Originality</strong>, while actively supporting the UN Sustainable Development Goal 17 (<strong class="text-brand-green">Global Partnerships</strong>).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="py-20 lg:py-28 bg-brand-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-6">Events Gallery</h2>
+                    <div class="w-20 h-1 bg-brand-blue mx-auto mb-6 rounded-full"></div>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Discover the vibrant life of international students at YunTech. From cultural festivals to unforgettable parties, see what we've been up to!
+                    </p>
+                </div>
+
+                <!-- Events Grid Container (Populated by JS) -->
+                <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Event cards will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="membership" class="py-20 lg:py-28 bg-white relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-brand-blue/5 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-brand-green/5 blur-3xl"></div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 fade-in-section">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-4">Membership</h2>
+                    <p class="text-gray-600">Elevate your YunTech experience. Join the AIS family.</p>
+                </div>
+
+                <div class="vip-card rounded-2xl shadow-2xl p-1 lg:p-2 transform transition-transform hover:scale-[1.01] duration-300">
+                    <div class="bg-white rounded-xl p-8 lg:p-12 h-full flex flex-col md:flex-row gap-8 items-center border border-gray-100">
+                        
+                        <!-- Left Side: Price & Title -->
+                        <div class="md:w-1/3 text-center md:text-left md:border-r border-gray-200 md:pr-8">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-navy/10 text-brand-navy mb-6">
+                                <i class="fa-solid fa-crown text-3xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-heading font-bold text-brand-navy mb-2">VIP Semester<br>Membership</h3>
+                            <div class="text-4xl font-extrabold text-brand-green mb-2">NT$ 300</div>
+                            <div class="text-gray-500 text-sm font-medium uppercase tracking-wider">Per Semester</div>
+                        </div>
+
+                        <!-- Right Side: Benefits -->
+                        <div class="md:w-2/3">
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-lightgreen/20 flex items-center justify-center text-brand-green mr-3 mt-0.5">
+                                        <i class="fa-solid fa-bolt text-xs"></i>
+                                    </div>
+                                    <span class="text-gray-700"><strong class="text-brand-navy">Priority Fast-Pass</strong> entry at all AIS events (skip the line)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-lightgreen/20 flex items-center justify-center text-brand-green mr-3 mt-0.5">
+                                        <i class="fa-solid fa-gift text-xs"></i>
+                                    </div>
+                                    <span class="text-gray-700">Priority access to <strong class="text-brand-navy">limited consumption items/souvenirs</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-lightgreen/20 flex items-center justify-center text-brand-green mr-3 mt-0.5">
+                                        <i class="fa-solid fa-tag text-xs"></i>
+                                    </div>
+                                    <span class="text-gray-700">Exclusive <strong class="text-brand-navy">discounts on premium paid events</strong> (e.g., cultural trips, semester-end parties)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-lightgreen/20 flex items-center justify-center text-brand-green mr-3 mt-0.5">
+                                        <i class="fa-solid fa-store text-xs"></i>
+                                    </div>
+                                    <span class="text-gray-700">Priority right to rent <strong class="text-brand-navy">one tenant/booth</strong> at the Cultural Event Exchange Fair</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="p-4 bg-blue-50 rounded-lg border border-blue-100 mb-8">
+                                <p class="text-sm text-brand-blue flex items-center">
+                                    <i class="fa-solid fa-circle-info mr-2"></i>
+                                    Membership dues support AIS's ability to run larger, higher-quality events for the whole YunTech international community.
+                                </p>
+                            </div>
+
+                            <a href="https://forms.gle/eyr9gSziptxU9fZU8" target="_blank" rel="noopener" class="block w-full text-center bg-brand-navy hover:bg-brand-blue text-white font-bold py-4 rounded-xl transition-colors shadow-lg hover:shadow-xl">
+                                Join as a Member Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 lg:py-28 bg-brand-navy text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-section">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Contact Info -->
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Get in Touch</h2>
+                        <div class="w-20 h-1 bg-brand-lightgreen mb-8 rounded-full"></div>
+                        <p class="text-gray-300 mb-8 text-lg">
+                            Have questions about our events, membership, or looking for collaborations? Reach out to us through our social media or visit us on campus.
+                        </p>
+                        
+                        <div class="space-y-6 mb-10">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-lightgreen mr-4 flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Campus Address</h4>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        No. 123, University Road, Section 3,<br>
+                                        Douliu City, Yunlin County 64002,<br>
+                                        Taiwan
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Buttons -->
+                        <h4 class="font-bold text-lg mb-4">Connect With Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.instagram.com/ais_yuntech" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-white text-brand-navy flex items-center justify-center hover:bg-brand-lightgreen hover:text-white transition-all transform hover:-translate-y-1 shadow-lg" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram text-xl"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@ais_yuntech" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-white text-brand-navy flex items-center justify-center hover:bg-brand-lightgreen hover:text-white transition-all transform hover:-translate-y-1 shadow-lg" aria-label="TikTok">
+                                <i class="fa-brands fa-tiktok text-xl"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/association-of-interntional-student-yuntech-ais" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-white text-brand-navy flex items-center justify-center hover:bg-brand-lightgreen hover:text-white transition-all transform hover:-translate-y-1 shadow-lg" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps Iframe -->
+                    <div class="bg-white/10 p-2 rounded-2xl backdrop-blur-sm border border-white/20">
+                        <div class="rounded-xl overflow-hidden aspect-video w-full h-full min-h-[300px]">
+                            <!-- Embedded map pointing to National Yunlin University of Science and Technology -->
+                            <iframe 
+                                src="https://maps.google.com/maps?q=National%20Yunlin%20University%20of%20Science%20and%20Technology,%20Taiwan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#051630] text-gray-400 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+            
+            <div class="flex items-center mb-6 md:mb-0">
+                <!-- AIS Logo (Removed invert filter, added bg-white and rounded padding for better contrast on dark footer) -->
+                <img 
+                    src="https://www.image2url.com/r2/default/images/1782913702721-295b9301-5a33-461a-b8e6-38dd8e05da81.png" 
+                    alt="AIS Logo" 
+                    class="h-12 w-auto mr-4 object-contain bg-white rounded-lg p-1.5"
+                    onerror="this.onerror=null; this.outerHTML='<div class=\'w-10 h-10 bg-brand-blue/30 rounded-full flex items-center justify-center mr-3\'><i class=\'fa-solid fa-globe text-white opacity-90\'></i></div>';"
+                >
+                <div class="text-sm">
+                    <p class="font-bold text-white tracking-wider mb-1">AIS YunTech</p>
+                    <p>&copy; 2026 Association of International Students, YunTech.<br>All rights reserved.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center flex-col md:flex-row text-center md:text-right">
+                <div class="text-xs mr-0 md:mr-4 mb-4 md:mb-0 max-w-xs">
+                    Operating under the Office of International Affairs,<br>National Yunlin University of Science and Technology.
+                </div>
+                <!-- YunTech Official Logo -->
+                <img 
+                    src="https://www.image2url.com/r2/default/images/1782921747075-ae08cdcd-1c37-4f33-ac0a-6b849a0cd649.jpg" 
+                    alt="YunTech Emblem" 
+                    class="h-12 w-12 rounded-full border-2 border-white/20 bg-white object-contain p-0.5"
+                    onerror="this.onerror=null; this.outerHTML='<div class=\'w-12 h-12 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/20\'><i class=\'fa-solid fa-building-columns text-white/80\'></i></div>';"
+                >
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Mobile Menu Toggle ---
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const menuLinks = menu.querySelectorAll('a');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking a link
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+
+            // --- 2. Dynamic Events Rendering ---
+            // TODO: Edit this array to add, remove, or modify events.
+            const events = [
+                {
+                    name: "Ma Shang Lunar Party",
+                    date: "4 March 2026",
+                    description: "Celebrate the Year of the Horse with a burst of red and gold! Join us for a festive gathering filled with traditional lucky foods, vibrant dragon dances, and the sharing of red envelopes. Let's welcome prosperity and good fortune together in this joyous Spring Festival celebration.",
+                    // TODO: share.google link provided. It is a redirect/preview, not an image. Will likely use the fallback. 
+                    // Re-host image and paste direct link here. Example format: https://drive.google.com/uc?export=view&id=FILE_ID
+                    coverImage: "https://www.image2url.com/r2/default/images/1782913336672-e6c4b525-6fe8-42d3-9c92-94a5226c7b43.png", 
+                    driveLink: "https://drive.google.com/drive/folders/1Epa9ciPFLDILkaanVLXY_-0IQ-mzwVj6?usp=sharing"
+                },
+                {
+                    name: "Shake Shake Mango",
+                    date: "6 May 2026",
+                    description: "Experience a sweet YunTech tradition! Join the mango-picking challenge along Longtan Road. Build your own tools, pluck fresh mangoes straight from the trees, and enjoy a delicious mango feast with friends.",
+                    // TODO: Same caveat. Replace with a direct image URL if broken.
+                    coverImage: "https://www.image2url.com/r2/default/images/1782913631479-3b16df9d-e61d-4f96-af35-d6bfdce7316f.png", 
+                    driveLink: "https://drive.google.com/drive/folders/1OB3JeHtV86e2puNrKq7EvQhUHmbbVwQ2?usp=drive_link"
+                },
+                {
+                    name: "404 Student Not Found",
+                    date: "5 June 2026",
+                    description: "Error 404: Students have graduated! Celebrate the end of an era with an unforgettable graduation party. Join the Association of International Students for a night of music, reflection, and celebration before starting your next big adventure.",
+                    // TODO: Same caveat. Replace with a direct image URL if broken.
+                    coverImage: "https://www.image2url.com/r2/default/images/1782913469776-4972b434-28b7-490f-b332-7ffc2c58889f.png", 
+                    driveLink: "https://drive.google.com/drive/folders/1DurzA-UT2ymhcwU6Mwxjv3KBIQEqmVK2?usp=sharing"
+                }
+                // TODO: Add more events here following the same object shape.
+            ];
+
+            const eventsContainer = document.getElementById('events-container');
+            
+            // Fallback image using Placehold.co in YunTech brand colors
+            const fallbackImage = "https://placehold.co/600x400/0B2C5E/FFFFFF?text=AIS+Event";
+
+            events.forEach((evt, index) => {
+                // Staggered animation delay for grid items
+                const animationDelay = index * 100;
+                
+                const cardHTML = `
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 fade-in-section" style="transition-delay: ${animationDelay}ms;">
+                        <div class="relative h-56 overflow-hidden bg-brand-navy/5">
+                            <img 
+                                src="${evt.coverImage}" 
+                                alt="${evt.name} Cover" 
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                onerror="this.onerror=null; this.src='${fallbackImage}';"
+                            >
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-brand-green text-xs font-bold shadow-sm">
+                                <i class="fa-regular fa-calendar mr-1"></i> ${evt.date}
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-heading font-bold text-brand-navy mb-3 line-clamp-1">${evt.name}</h3>
+                            <p class="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed">${evt.description}</p>
+                            <a href="${evt.driveLink}" target="_blank" rel="noopener" class="inline-flex items-center text-sm font-bold text-brand-blue hover:text-brand-navy transition-colors group">
+                                View Photo Album 
+                                <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                eventsContainer.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+
+            // --- 3. Scroll Reveal Animation (Intersection Observer) ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Stop observing once visible to run animation only once
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with fade-in class
+            document.querySelectorAll('.fade-in-section').forEach(el => {
+                observer.observe(el);
+            });
+            
+        });
+    </script>
+</body>
+</html>
